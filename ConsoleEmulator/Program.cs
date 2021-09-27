@@ -6,20 +6,20 @@ namespace ConsoleEmulator
 {
     class Program
     {
-        static void Main()
+        private static void Main()
         {
 
-            ConsoleEmulator console_emul = new ConsoleEmulator();
+            ConsoleEmulator consoleEmul = new ConsoleEmulator();
 
-            console_emul.Error = ShowConsoleError;
-            console_emul.Info = ShowConsoleInfo;
-            console_emul.ConsEmulOut = ShowConsoleOut;
+            consoleEmul.Error = ShowConsoleError;
+            consoleEmul.Info = ShowConsoleInfo;
+            consoleEmul.ConsEmulOut = ShowConsoleOut;
 
-            string command_enter = "";
+            string commandEnter = "";
 
-            console_emul.ShowConcole();
+            consoleEmul.ShowConcole();
 
-            while (command_enter !="exit")
+            while (commandEnter !="exit")
             {
                 string command = ""; // Команда
                 string param = "";  //  Параметр
@@ -28,14 +28,14 @@ namespace ConsoleEmulator
                 Console.Write("Введите команду: ");
                 Console.ForegroundColor = ConsoleColor.White;
 
-                command_enter = Console.ReadLine().ToString();
+                commandEnter = Console.ReadLine().ToString();
 
-                if (command_enter.Contains(" "))
+                if (commandEnter.Contains(" "))
                 {
                     //  Строка содержит пробел
                     //  Значит введена комманда с параметром
 
-                    string[] command_split = command_enter.Split(" ");
+                    string[] command_split = commandEnter.Split(" ");
                 
                     //Console.WriteLine(command_split.Length);
 
@@ -59,7 +59,7 @@ namespace ConsoleEmulator
                 else
                 {
                     //  Введена комманда без параметра
-                    command = command_enter;
+                    command = commandEnter;
                 }
 
                 //  Debug:
@@ -70,13 +70,13 @@ namespace ConsoleEmulator
                 {
                     case "help":
                         //  Показать заставку меню
-                        console_emul.ShowConcole();
+                        consoleEmul.ShowConcole();
                         break;
 
                     case "sp":
                         //  Вывести текущий путь
                         ShowConsoleInfo("Текущий каталог:");
-                        ShowConsoleInfo(console_emul.ShowPath());
+                        ShowConsoleInfo(consoleEmul.ShowPath());
                         break;
 
                     case "sd":
@@ -86,7 +86,7 @@ namespace ConsoleEmulator
 
                         Console.ForegroundColor = ConsoleColor.Cyan;
 
-                        console_emul.ShowDirectories();
+                        consoleEmul.ShowDirectories();
 
                         Console.ResetColor();
                         break;
@@ -98,7 +98,7 @@ namespace ConsoleEmulator
 
                         Console.ForegroundColor = ConsoleColor.Gray;
 
-                        console_emul.ShowFiles();
+                        consoleEmul.ShowFiles();
 
                         Console.ResetColor();
 
@@ -106,19 +106,19 @@ namespace ConsoleEmulator
 
                     case "gp":
                         //  Перейти в указанный каталог
-                        console_emul.GoPath(param);
+                        consoleEmul.GoPath(param);
                         
-                        ShowConsoleInfo(console_emul.ShowPath());
+                        ShowConsoleInfo(consoleEmul.ShowPath());
                         break;
 
                     case "cf":
                         // Создать текстовый файл
-                        console_emul.CreateFile(param);
+                        consoleEmul.CreateFile(param);
                         break;
 
                     case "rf":
                         //  Вывод на экран терминала содержимого файла
-                        console_emul.ReadFile(param);
+                        consoleEmul.ReadFile(param);
                         break;
 
                     case "cpf":
@@ -139,13 +139,13 @@ namespace ConsoleEmulator
                         }
                         else
                         {
-                            console_emul.CopyFile(split_param[0], split_param[1]);
+                            consoleEmul.CopyFile(split_param[0], split_param[1]);
                         }
                         break;
 
                     case "rmf":
                         // Удалить файл
-                        console_emul.RemoveFile(param);
+                        consoleEmul.RemoveFile(param);
                         break;
 
                     case "exit":
